@@ -5,4 +5,5 @@ services:
 before_install:
   - docker-compose up -d
 script:
+  - docker-compose exec web bundle exec rails db:test:prepare
   - docker-compose exec web bundle exec rspec spec
