@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:9.5
+    volumes:
+      - ./tmp/new_db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: new
+      POSTGRES_PASSWORD: new_password
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      PG_USER: new
+      PG_PASSWORD: new_password
+      PG_HOST: db
