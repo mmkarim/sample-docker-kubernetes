@@ -1,0 +1,9 @@
+version: 2
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout
+     - run: docker-compose -f docker-compose-dev.yml up -d
+     - run: docker-compose exec web bundle exec rails db:test:prepare
+     - run: docker-compose exec web bundle exec rspec spec

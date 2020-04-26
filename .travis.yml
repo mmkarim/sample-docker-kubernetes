@@ -9,6 +9,6 @@ script:
   - docker-compose exec web bundle exec rspec spec
 after_success:
   - docker-compose down
-  - sudo docker build -f Dockerfile -t mmkarim/sample_docker_web .
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && sudo docker build -f Dockerfile -t mmkarim/sample_docker_web .
   - echo "$DOCKER_PASS" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push mmkarim/sample_docker_web
