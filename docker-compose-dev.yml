@@ -4,7 +4,7 @@ services:
   db:
     image: postgres:9.5
     volumes:
-      - ./tmp/new_db:/var/lib/postgresql/data
+      - ./tmp/new_db_dev:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
