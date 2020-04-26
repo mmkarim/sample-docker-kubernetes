@@ -9,6 +9,6 @@ script:
   - docker-compose exec web bundle exec rspec spec
 after_success:
   - docker-compose down
-  - docker build -t mmkarim/sample_docker_web .
+  - docker build -f Dockerfile -t mmkarim/sample_docker_web .
   - echo "$DOCKER_PASS" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push mmkarim/sample_docker_web
