@@ -12,9 +12,11 @@ services:
       POSTGRES_PASSWORD: new_password
   web:
     stdin_open: true
-    image: mmkarim/sample_docker_web
-    build: .
-    command: bundle exec puma -t 5:5 -w 1 -p 3000 -e production
+    image: mmkarim/sample_docker_web_dev
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    command: bundle exec puma -t 5:5 -w 1 -p 3000
     volumes:
       - .:/myapp
     ports:
@@ -27,5 +29,3 @@ services:
       PG_USER: new
       PG_PASSWORD: new_password
       PG_HOST: db
-      SECRET_KEY_BASE: production_test_key
-      RAILS_LOG_TO_STDOUT: available
