@@ -2,7 +2,7 @@ sudo: required
 services:
   - docker
 
-before_install:
+before_script:
   - docker-compose -f docker-compose-dev.yml up -d
 script:
   - docker-compose exec web bundle exec rails db:test:prepare
