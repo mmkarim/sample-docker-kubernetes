@@ -23,10 +23,11 @@ default: &default
   username: <%= ENV['PG_USER'] %>
   password: <%= ENV['PG_PASSWORD'] %>
   host: <%= ENV['PG_HOST'] %>
+  port: <%= ENV['PG_PORT'] || 5432 %>
 
 development:
   <<: *default
-  database: sample_docker_development
+  database: <%= ENV['PG_DATABASE'] || "sample_docker_development" %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -84,4 +85,3 @@ test:
 production:
   <<: *default
   database: <%= ENV['PG_DATABASE'] || "sample_docker_production" %>
-  port: <%= ENV['PG_PORT'] || 5432 %>

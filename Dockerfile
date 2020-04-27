@@ -5,10 +5,12 @@ RUN mkdir /myapp
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
-RUN bundle install
+RUN bundle install --without development test
 COPY . /myapp
 
 EXPOSE 3000
 
+# https://gist.github.com/rwarbelow/40bd72b2aee8888d6d91
+
 CMD ["bundle", "exec", "rails", "db:migrate"]
-CMD ["bundle", "exec", "puma", "-t", "5:5", "-w", "1", "-p", "3000", "-e", "production"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]

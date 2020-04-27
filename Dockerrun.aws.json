@@ -5,15 +5,25 @@
       "name": "web",
       "image": "mmkarim/sample_docker_web",
       "hostname": "web",
-      "essential": true,
-      "memory": 128
+      "essential": false,
+      "memory": 312,
+      "portMappings": [
+        {
+          "hostPort": 5432,
+          "containerPort": 5432
+        },
+        {
+          "hostPort": 3000,
+          "containerPort": 3000
+        }
+      ]
     },
     {
       "name": "nginx",
       "image": "mmkarim/sample_docker_nginx",
       "hostname": "nginx",
       "essential": true,
-      "memory": 128,
+      "memory": 100,
       "portMappings": [
         {
           "hostPort": 80,

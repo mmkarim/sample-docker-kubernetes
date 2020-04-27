@@ -1,22 +1,13 @@
 version: '3'
 
 services:
-  db:
-    image: postgres:9.5
-    volumes:
-      - ./tmp/new_db:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: new
-      POSTGRES_PASSWORD: new_password
   nginx:
     restart: always
     build:
-      context: ./nginx
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.nginx
     ports:
-      - "4000:80"
+      - "80:80"
     depends_on:
       - web
   web:
@@ -27,14 +18,12 @@ services:
       - .:/myapp
     ports:
       - "3000:3000"
-    depends_on:
-      - db
-    links:
-      - db
+      - "5432:5432"
     environment:
-      PG_USER: new
+      PG_USER: clark
       PG_PORT: 5432
-      PG_PASSWORD: new_password
-      PG_HOST: db
+      PG_PASSWORD: clark
+      PG_HOST: docker.for.mac.host.internal
       SECRET_KEY_BASE: production_test_key
       RAILS_LOG_TO_STDOUT: available
+      RAILS_ENV: production
