@@ -10,5 +10,7 @@ script:
 after_success:
   - docker-compose down
   - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && sudo docker build -f Dockerfile -t mmkarim/sample_docker_web .
+  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && sudo docker build -f nginx/Dockerfile -t mmkarim/sample_docker_nginx ./nginx
   - echo "$DOCKER_PASS" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push mmkarim/sample_docker_web
+  - docker push mmkarim/sample_docker_nginx
