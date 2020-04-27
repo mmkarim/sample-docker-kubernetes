@@ -1,0 +1,26 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "web",
+      "image": "mmkarim/sample_docker_web",
+      "hostname": "web",
+      "essential": true,
+      "memory": 128
+    },
+    {
+      "name": "nginx",
+      "image": "mmkarim/sample_docker_nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["web"]
+    }
+  ]
+}

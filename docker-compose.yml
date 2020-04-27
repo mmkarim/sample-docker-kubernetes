@@ -23,7 +23,6 @@ services:
     stdin_open: true
     image: mmkarim/sample_docker_web
     build: .
-    command: bundle exec puma -t 5:5 -w 1 -p 3000 -e production
     volumes:
       - .:/myapp
     ports:
@@ -34,6 +33,7 @@ services:
       - db
     environment:
       PG_USER: new
+      PG_PORT: 5432
       PG_PASSWORD: new_password
       PG_HOST: db
       SECRET_KEY_BASE: production_test_key

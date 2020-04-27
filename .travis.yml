@@ -14,3 +14,16 @@ after_success:
   - echo "$DOCKER_PASS" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push mmkarim/sample_docker_web
   - docker push mmkarim/sample_docker_nginx
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "sample-docker"
+  env: "SampleDocker-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-676828608199"
+  bucket_path: "sample-docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET

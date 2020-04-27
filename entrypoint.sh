@@ -2,6 +2,6 @@
 
 set -e
 
-RAILS_ENV=production bundle exec rails db:create db:migrate
+RAILS_ENV=production bundle exec rails db:migrate
 
 exec "$@"

@@ -84,3 +84,4 @@ test:
 production:
   <<: *default
   database: <%= ENV['PG_DATABASE'] || "sample_docker_production" %>
+  port: <%= ENV['PG_PORT'] || 5432 %>
